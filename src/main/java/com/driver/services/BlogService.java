@@ -26,6 +26,7 @@ public class BlogService {
 
     public List<Blog> showBlogs(){
         //find all blogs
+        return blogRepository1.findAll();
 
     }
 
@@ -36,17 +37,60 @@ public class BlogService {
 
         //Updating the userInformation and changing its blogs
 
+
+        Blog tempBlog = new Blog(title, content, new Date());
+        tempBlog.setUser(userRepository1.findById(userId).get());
+
+        User tempUser = userRepository1.findById(userId).get();
+
+        List<Blog> ans = tempUser.getBlogList();
+        ans.add(tempBlog);
+        tempUser.setBlogList(ans);
+
+
+        blogRepository1.save(tempBlog);
+        userRepository1.save(tempUser);
+
+
+
     }
 
     public Blog findBlogById(int blogId){
         //find a blog
+
+        return  blogRepository1.findById(blogId).get();
     }
 
     public void addImage(Integer blogId, String description, String dimensions){
         //add an image to the blog after creating it
+
+        Blog tempBlog = blogRepository1.findById(blogId).get();
+
+        Image tempImage = imageService1.createAndReturn(tempBlog, description, dimensions);
+
+        tempImage.setBlog(tempBlog);
+
+        List<Image> listOfImages = tempBlog.getImageList();
+
+        if(listOfImages == null){
+            listOfImages = new ArrayList<>();
+        }
+
+        listOfImages.add(tempImage);
+
+        tempBlog.setImageList(listOfImages);
+
+        blogRepository1.save(tempBlog);
+
+
     }
 
     public void deleteBlog(int blogId){
         //delete blog and corresponding images
+        if(blogRepository1.findById(blogId).get() != null){
+            blogRepository1.deleteById(blogId);
+        }
+
+
     }
 }

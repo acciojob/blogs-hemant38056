@@ -10,5 +10,5 @@ import java.util.ArrayList;
 
 @Repository
 public interface BlogRepository extends JpaRepository<Blog, Integer> {
-
+    public void deleteBlog(int blogId);
 }
