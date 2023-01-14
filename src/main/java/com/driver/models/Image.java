@@ -26,24 +26,20 @@ public class Image {
     public int getId() {
         return id;
     }
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public String getDescription() {
         return description;
+    }
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public String getDimension() {
         return dimension;
     }
-
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
     public void setDimension(String dimension) {
         this.dimension = dimension;
     }
