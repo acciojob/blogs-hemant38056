@@ -1,88 +1,4 @@
-//package com.driver.models;
-//
-//import javax.persistence.*;
-//import java.util.List;
-//
-//@Entity
-//public class User {
-//    @Id
-//    @GeneratedValue(strategy = GenerationType.IDENTITY)
-//    int id;
-//
-//    String username;
-//    String password;
-//
-//    String firstname;
-//    String lastname;
-//
-//    public User(){
-//
-//    }
-//
-//    public User(String username, String password, String firstname, String lastname){
-//        this.username = username;
-//        this.password = password;
-//        this.firstname = firstname;
-//        this.lastname = lastname;
-//    }
-//
-//    public int getId() {
-//        return id;
-//    }
-//
-//    public void setId(int id) {
-//        this.id = id;
-//    }
-//
-//
-//    public String getUsername() {
-//        return username;
-//    }
-//
-//    public void setUsername(String username) {
-//        this.username = username;
-//    }
-//
-//
-//    public String getPassword() {
-//        return password;
-//    }
-//
-//    public void setPassword(String password) {
-//        this.password = password;
-//    }
-//
-//    public String getFirstname() {
-//        return firstname;
-//    }
-//
-//    public void setFirstname(String firstname) {
-//        this.firstname = firstname;
-//    }
-//
-//    public String getLastname() {
-//        return lastname;
-//    }
-//
-//    public void setLastname(String lastname) {
-//        this.lastname = lastname;
-//    }
-//
-//    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
-//    public List<Blog> blogList;
-//
-//    public List<Blog> getBlogList() {
-//        return blogList;
-//    }
-//
-//    public void setBlogList(List<Blog> blogList){
-//        this.blogList = blogList;
-//    }
-//}
-
 package com.driver.models;
-
-import net.bytebuddy.implementation.bind.MethodDelegationBinder;
 
 import javax.persistence.*;
 import java.util.List;
@@ -91,24 +7,24 @@ import java.util.List;
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    int id;
 
-    public List<Blog> getBlogList() {
-        return blogList;
+    String username;
+    String password;
+
+    String firstname;
+    String lastname;
+
+    public User(){
+
     }
 
-    public void setBlogList(List<Blog> blogList) {
-        this.blogList = blogList;
+    public User(String username, String password, String firstname, String lastname){
+        this.username = username;
+        this.password = password;
+        this.firstname = firstname;
+        this.lastname = lastname;
     }
-
-    @Column(unique = true)
-    private String username;
-
-    private String password;
-
-    private String firstname;
-
-    private String lastname;
 
     public int getId() {
         return id;
@@ -118,6 +34,7 @@ public class User {
         this.id = id;
     }
 
+
     public String getUsername() {
         return username;
     }
@@ -125,6 +42,7 @@ public class User {
     public void setUsername(String username) {
         this.username = username;
     }
+
 
     public String getPassword() {
         return password;
@@ -150,15 +68,97 @@ public class User {
         this.lastname = lastname;
     }
 
-    public User() {
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    public List<Blog> blogList;
+
+    public List<Blog> getBlogList() {
+        return blogList;
     }
 
-    public User( String username, String password, String firstname, String lastname) {
-        this.username = username;
-        this.password = password;
-        this.firstname = firstname;
-        this.lastname = lastname;
+    public void setBlogList(List<Blog> blogList){
+        this.blogList = blogList;
     }
-    @OneToMany(mappedBy = "user",cascade = CascadeType.ALL)
-    private List<Blog> blogList;
 }
+
+//package com.driver.models;
+//
+//import net.bytebuddy.implementation.bind.MethodDelegationBinder;
+//
+//import javax.persistence.*;
+//import java.util.List;
+//
+//@Entity
+//public class User {
+//    @Id
+//    @GeneratedValue(strategy = GenerationType.IDENTITY)
+//    private int id;
+//
+//    public List<Blog> getBlogList() {
+//        return blogList;
+//    }
+//
+//    public void setBlogList(List<Blog> blogList) {
+//        this.blogList = blogList;
+//    }
+//
+//    @Column(unique = true)
+//    private String username;
+//
+//    private String password;
+//
+//    private String firstname;
+//
+//    private String lastname;
+//
+//    public int getId() {
+//        return id;
+//    }
+//
+//    public void setId(int id) {
+//        this.id = id;
+//    }
+//
+//    public String getUsername() {
+//        return username;
+//    }
+//
+//    public void setUsername(String username) {
+//        this.username = username;
+//    }
+//
+//    public String getPassword() {
+//        return password;
+//    }
+//
+//    public void setPassword(String password) {
+//        this.password = password;
+//    }
+//
+//    public String getFirstname() {
+//        return firstname;
+//    }
+//
+//    public void setFirstname(String firstname) {
+//        this.firstname = firstname;
+//    }
+//
+//    public String getLastname() {
+//        return lastname;
+//    }
+//
+//    public void setLastname(String lastname) {
+//        this.lastname = lastname;
+//    }
+//
+//    public User() {
+//    }
+//
+//    public User( String username, String password, String firstname, String lastname) {
+//        this.username = username;
+//        this.password = password;
+//        this.firstname = firstname;
+//        this.lastname = lastname;
+//    }
+//    @OneToMany(mappedBy = "user",cascade = CascadeType.ALL)
+//    private List<Blog> blogList;
+//}
