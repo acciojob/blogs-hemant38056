@@ -16,7 +16,7 @@ public class Blog {
     private String content;
 
 
-    private Date pubdate;
+    private Date pubDate;
 
 
 
@@ -24,10 +24,10 @@ public class Blog {
 
     }
 
-    public Blog(String title, String content, Date pubdate){
+    public Blog(String title, String content, Date pubDate){
         this.title = title;
         this.content = content;
-        this.pubdate = pubdate;
+        this.pubDate = pubDate;
     }
 
 
@@ -61,11 +61,11 @@ public class Blog {
 
 
 
-    public Date getPubdate() {
-        return pubdate;
+    public Date getPubDate() {
+        return pubDate;
     }
-    public void setPubdate(Date pubdate) {
-        this.pubdate = pubdate;
+    public void setPubDate(Date pubDate) {
+        this.pubDate = pubDate;
     }
 
 
