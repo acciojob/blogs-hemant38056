@@ -52,8 +52,8 @@ public class ImageService {
         //In case the image is null, return 0
 
         if(screenDimensions.split("X").length == 2 || Objects.nonNull(image)){
-            int length = Integer.parseInt(screenDimensions.split("X")[0] ) / Integer.parseInt(image.getDimension().split("X")[0]);
-            int breadth = Integer.parseInt(screenDimensions.split("X")[1]) / Integer.parseInt(image.getDimension().split("X")[1]);
+            int length = Integer.parseInt(screenDimensions.split("X")[0] ) / Integer.parseInt(image.getDimensions().split("X")[0]);
+            int breadth = Integer.parseInt(screenDimensions.split("X")[1]) / Integer.parseInt(image.getDimensions().split("X")[1]);
 
             return length * breadth;
         }
