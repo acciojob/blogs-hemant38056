@@ -1,6 +1,7 @@
 package com.driver.models;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -81,18 +82,22 @@ public class Blog {
 
     @ManyToOne
     @JoinColumn
-    public com.driver.models.User user;
+    private User user;
 
     public User getUser(){
         return user;
     }
 
-//    public void setUser(User user) {
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    //    public void setUser(User user) {
 //        this.user = user;
 //    }
 
     @OneToMany(mappedBy = "blog", cascade = CascadeType.ALL)
-    private List<Image> imageList;
+    private List<Image> imageList = new ArrayList<>();
 
     public List<Image> getImageList() {
         return imageList;
@@ -103,9 +108,7 @@ public class Blog {
     }
 
 
-    public void setUser(com.driver.models.User user) {
-        this.user = user;
-    }
+
 }
 
 //package com.driver.models;

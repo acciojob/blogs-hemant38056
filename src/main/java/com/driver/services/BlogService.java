@@ -22,11 +22,14 @@ public class BlogService {
     ImageService imageService1;
 
     @Autowired
+    ImageRepository imageRepository;
+
+    @Autowired
     UserRepository userRepository1;
 
     public List<Blog> showBlogs(){
         //find all blogs
-        return blogRepository1.findAll();
+       return blogRepository1.findAll();
 
     }
 
@@ -38,20 +41,22 @@ public class BlogService {
         //Updating the userInformation and changing its blogs
 
 
-        Blog tempBlog = new Blog(title, content, new Date());
-        tempBlog.setUser(userRepository1.findById(userId).get());
+       Blog blog = new Blog();
+       User user = userRepository1.findById(userId).get();
 
-        User tempUser = userRepository1.findById(userId).get();
+       // updating the blog details
+        blog.setUser(user);
+        blog.setTitle(title);
+        blog.setContent(content);
+        blog.setPubDate(new Date());
 
-        List<Blog> ans = tempUser.getBlogList();
-        ans.add(tempBlog);
-        tempUser.setBlogList(ans);
+        // updating the user information and changing its blogs
+        List<Blog> blogList = user.getBlogList();
+        blogList.add(blog);
+        user.setBlogList(blogList);
 
-
-        blogRepository1.save(tempBlog);
-        userRepository1.save(tempUser);
-
-
+        //Only calling the parent userRepository function as the child function will automatically be called by cascading
+        userRepository1.save(user);
 
     }
 
@@ -64,24 +69,32 @@ public class BlogService {
     public void addImage(Integer blogId, String description, String dimensions){
         //add an image to the blog after creating it
 
-        Blog tempBlog = blogRepository1.findById(blogId).get();
+//        Blog tempBlog = blogRepository1.findById(blogId).get();
+//
+//        Image tempImage = imageService1.createAndReturn(tempBlog, description, dimensions);
+//
+//        tempImage.setBlog(tempBlog);
+//
+//        List<Image> listOfImages = tempBlog.getImageList();
+//
+//        if(listOfImages == null){
+//            listOfImages = new ArrayList<>();
+//        }
+//
+//        listOfImages.add(tempImage);
+//
+//        tempBlog.setImageList(listOfImages);
+//
+//        blogRepository1.save(tempBlog);
 
-        Image tempImage = imageService1.createAndReturn(tempBlog, description, dimensions);
+        Blog blog = blogRepository1.findById(blogId).get();
+        Image image = imageService1.createAndReturn(blog, description, dimensions);
 
-        tempImage.setBlog(tempBlog);
+        List<Image> imageList = blog.getImageList();
+        imageList.add(image);
+        blog.setImageList(imageList);
 
-        List<Image> listOfImages = tempBlog.getImageList();
-
-        if(listOfImages == null){
-            listOfImages = new ArrayList<>();
-        }
-
-        listOfImages.add(tempImage);
-
-        tempBlog.setImageList(listOfImages);
-
-        blogRepository1.save(tempBlog);
-
+        blogRepository1.save(blog);//Just calling the parent repository and child repository will automatically be called.
 
     }
 
